@@ -7,20 +7,20 @@
 			</div>
 			<div class="clearfix" >
 				<ul id="thumblist" class="clearfix" >
-					@if($produk->gambar1!='')
-				  <li>
-					<a class="zoomThumbActive" href='javascript:void(0);' rel="{gallery: 'gal1', smallimage: '../{{getPrefixDomain().'/produk/'.$produk->gambar1}}',largeimage: '../{{getPrefixDomain().'/produk/'.$produk->gambar1}}'}"><img src="{{URL::to(getPrefixDomain().'/produk/'.$produk->gambar1)}}"></a>
-				  </li>
-				  @endif
-				  @if($produk->gambar2!='')
-				  <li><a href='javascript:void(0);' rel="{gallery: 'gal1', smallimage: '../{{getPrefixDomain().'/produk/'.$produk->gambar2}}',largeimage: '../{{getPrefixDomain().'/produk/'.$produk->gambar2}}'}"><img src="{{URL::to(getPrefixDomain().'/produk/'.$produk->gambar2)}}"></a></li>
-				  @endif
-				  @if($produk->gambar3!='')
-				  <li><a  href='javascript:void(0);' rel="{gallery: 'gal1', smallimage: '../{{getPrefixDomain().'/produk/'.$produk->gambar3}}',largeimage: '../{{getPrefixDomain().'/produk/'.$produk->gambar3}}'}"><img src="{{URL::to(getPrefixDomain().'/produk/'.$produk->gambar3)}}"></a></li>
-				  @endif
-				  @if($produk->gambar4!='')
-				  <li><a  href='javascript:void(0);' rel="{gallery: 'gal1', smallimage: '../{{getPrefixDomain().'/produk/'.$produk->gambar4}}',largeimage: '../{{getPrefixDomain().'/produk/'.$produk->gambar4}}'}"><img src="{{URL::to(getPrefixDomain().'/produk/'.$produk->gambar4)}}"></a></li>
-				  @endif
+				@if($produk->gambar1!='')
+					<li>
+						<a class="zoomThumbActive" href='javascript:void(0);' rel="{gallery: 'gal1', smallimage: '../{{getPrefixDomain().'/produk/'.$produk->gambar1}}',largeimage: '../{{getPrefixDomain().'/produk/'.$produk->gambar1}}'}"><img src="{{URL::to(getPrefixDomain().'/produk/'.$produk->gambar1)}}"></a>
+					</li>
+				@endif
+				@if($produk->gambar2!='')
+					<li><a href='javascript:void(0);' rel="{gallery: 'gal1', smallimage: '../{{getPrefixDomain().'/produk/'.$produk->gambar2}}',largeimage: '../{{getPrefixDomain().'/produk/'.$produk->gambar2}}'}"><img src="{{URL::to(getPrefixDomain().'/produk/'.$produk->gambar2)}}"></a></li>
+				@endif
+				@if($produk->gambar3!='')
+					<li><a  href='javascript:void(0);' rel="{gallery: 'gal1', smallimage: '../{{getPrefixDomain().'/produk/'.$produk->gambar3}}',largeimage: '../{{getPrefixDomain().'/produk/'.$produk->gambar3}}'}"><img src="{{URL::to(getPrefixDomain().'/produk/'.$produk->gambar3)}}"></a></li>
+				@endif
+				@if($produk->gambar4!='')
+					<li><a  href='javascript:void(0);' rel="{gallery: 'gal1', smallimage: '../{{getPrefixDomain().'/produk/'.$produk->gambar4}}',largeimage: '../{{getPrefixDomain().'/produk/'.$produk->gambar4}}'}"><img src="{{URL::to(getPrefixDomain().'/produk/'.$produk->gambar4)}}"></a></li>
+				@endif
 				</ul>
 			</div>
 		</div><!--end:prod-->
@@ -45,31 +45,37 @@
 			</form>
 			<div id="tab">
 				<ul class="nav">
-					<li class="nav-one"><a href="#details" class="current">Details</a></li>
-					<li class="nav-two"><a href="#specs">Specification</a></li>
-					<li class="nav-three"><a href="#reviews">Reviews</a></li> 
-					<li class="nav-four last"><a href="#tags">Tags</a></li>
+					<li class="nav-one"><a href="#desc" class="current">Deskripsi</a></li>
+					<li class="nav-two"><a href="#detail">Detail</a></li>
+					<li class="nav-three"><a href="#reviews">Reviews</a></li>
+					<li class="nav-four"><a href="#tags">Tags</a></li>
+					<li class="nav-five last"><a href="#share">Share</a></li>
 				</ul>
 				<div class="list-wrap">
-					<div id="details">
+					<div id="desc">
 						{{$produk->deskripsi}}
 					</div>
-					<ul id="specs" class="hide">
+					<ul id="detail" class="hide">
 						<li><span>Berat:</span> {{$produk->berat}} gram</li>
 						<li><span>Stock:</span> {{$produk->stok}}</li>
 						<li><span>Vendor:</span> {{$produk->vendor}}</li>
 					</ul>
-					<div id="reviews" class="hide">
+					<div id="reviews" class="hide" style="min-height: 110px;">
 						<form action="#">
-						  <fieldset>
-							  {{$fbscript}}
-						  {{fbcommentbox(slugProduk($produk), '500px', '5', 'light')}}
-						  </fieldset>
+							<fieldset>
+								{{$fbscript}}
+								{{fbcommentbox(slugProduk($produk), '500px', '5', 'light')}}
+							</fieldset>
 						</form>
 					</div> 
 					<ul id="tags" class="hide">
 						{{getTagsProduk('<li><a href="#"></a></li>',$produk->tags,',');}}
 					</ul>
+					<div id="share" class="hide">
+						<iframe src="//www.facebook.com/plugins/share_button.php?href={{URL::to(slugProduk($produk))}}&amp;layout=button" scrolling="no" frameborder="0" style="border:none; overflow:hidden;height:20px;width:70px;" allowTransparency="true"></iframe>
+						<a class="twitter-share-button" href="https://twitter.com/share" data-count="none">Tweet </a>
+						<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+					</div>
 				</div>
 			</div>
 		</div><!--prodetail-->
@@ -86,9 +92,10 @@
 					<div class="div-related">
 						{{HTML::image(getPrefixDomain().'/produk/'.$myproduk->gambar1, $myproduk->nama)}}
 						<article class="da-animate da-slideFromRight" style="display: block;">
-						<p>
-						<a href="{{slugProduk($myproduk)}}" class="link tip" title="View Detail"></a>&nbsp;
-						<a href="{{URL::to(getPrefixDomain().'/produk/'.$myproduk->gambar1)}}" rel="prettyPhoto[gallery1]" class="zoom tip" title="Zoom" ></a></p>
+							<p>
+								<a href="{{slugProduk($myproduk)}}" class="link tip" title="View Detail"></a>&nbsp;
+								<a href="{{URL::to(getPrefixDomain().'/produk/'.$myproduk->gambar1)}}" rel="prettyPhoto[gallery1]" class="zoom tip" title="Zoom" ></a>
+							</p>
 						</article>
 					</div>
 				</div>
