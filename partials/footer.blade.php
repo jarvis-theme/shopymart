@@ -22,10 +22,13 @@
 	<div class="container-2">
 		<div style="clear:both; display:block; height:40px"></div>
 		<div class="ship">
-			<a href="#"><img src="{{URL::to(dirTemaToko().'shopymart/assets/images/service-1.png')}}" alt=""></a>	
-			<span>Alamat: </span><br>
-			<span>{{$kontak->alamat}} </span><br>
-			<br>
+			<a href="#"><img src="{{URL::to(dirTemaToko().'shopymart/assets/images/service-1.png')}}" alt=""></a>
+			<div style="margin-left:68px;">
+				<span>Alamat: </span><br>
+				<span>{{$kontak->alamat}} </span><br>
+				<span>Telepon: </span><br>
+				<span>{{$kontak->telepon}}</span><br><br>
+			</div>
 		</div>
 		<div id="mc_embed_signup" class="subs">
 			<h4>Sign up for our Newsletter</h4>
