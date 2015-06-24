@@ -2,18 +2,20 @@
 		<div style="clear:both; display:block; height:20px"></div>
 		<div class="container-2">
 			<section class="content">                    	
-				<div class="entry">						
-					<h2><a href="single.html">{{$detailblog->judul}}</a></h2>
+				<div class="entry">
+					<h2><a href="{{blog_url($detailblog)}}">{{$detailblog->judul}}</a></h2>
 					<ul>
 						<li class="category">Date: <a href="#">{{waktuTgl($detailblog->updated_at)}}</a></li>
-						<li class="comment">Category: <a href="{{URL::to('blog/category/'.Str::slug($detailblog->kategori->nama))}}">{{$detailblog->kategori->nama}}</a></li>
+						@if(count($detailblog->kategori) > 0)
+						<li class="comment">Category: <a href="{{blog_category_url(@$detailblog->kategori)}}">{{@$detailblog->kategori->nama}}</a></li>
+						@endif
 					</ul>
 					<p>{{$detailblog->isi}}</p>
 				</div><!--entry-->
 				<hr>
 				<div>
 					{{$fbscript}}
-					{{$fbcomment}}
+            		{{fbcommentbox(url(blog_url($detailblog)), '100%', '5', 'light')}}
 				</div>
 				<div class="navigate comments clearfix">
 				@if(isset($prev))	
@@ -34,15 +36,19 @@
 			<div class="side">
 				<h4>Category</h4>
 				<ul class="cat">
-					@foreach($categoryList as $key=>$value)
-					<li><a href="{{URL::to('blog/category/'.generateSlug($value))}}">{{$value->nama}}</a></li>
+					@foreach(list_blog_category() as $key=>$value)
+					<li><a href="{{blog_category_url($value)}}">{{$value->nama}}</a></li>
 					@endforeach
 				</ul>
 			</div><!--end:side-->
 			<div class="side">
 				<h4>Banner</h4>
-				@foreach(getBanner(1) as $item)
-				<div><a href="{{URL::to($item->url)}}"><img src="{{URL::to(getPrefixDomain().'/galeri/'.$item->gambar)}}" /></a></div>
+				@foreach(vertical_banner() as $item)
+				<div>
+					<a href="{{URL::to($item->url)}}">
+						<img src="{{URL::to(banner_image_url($item->gambar))}}" />
+					</a>
+				</div>
 				@endforeach
 			</div><!--end:side-->			
 		</aside>

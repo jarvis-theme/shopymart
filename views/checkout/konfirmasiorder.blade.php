@@ -7,14 +7,13 @@
 <div class="content-wrap">
     <div style="clear:both; display:block; height:20px"></div>
         <div id="intro">
-        	
-                <h3><a href="#">Konfirmasi Order &nbsp;</a></h3>
-           
+            <h3><a href="#">Konfirmasi Order &nbsp;</a></h3>
         </div>
         <div class="container-2">
         	<div style="clear:both; display:block; height:40px"></div>
+            <div class="table-responsive">
             <table class="shopping-cart">
-                  <tr>
+                <tr>
                     <th class="image">ID Order</th>
                     <th class="name">Tanggal Order</th>
                     <th class="model">Detail Order</th>
@@ -22,8 +21,8 @@
                     <th class="quantity">Jumlah yg belum di bayar </th>
                     <th class="price">No. Resi</th>
                     <th class="total">Status</th>
-                    <th class="action">Action</th>
-                  </tr>
+                    <!-- <th class="action">Action</th> -->
+                </tr>
 
                   <tr>
                     <td class="image">{{prefixOrder()}}{{$order->kodeOrder}}</td>
@@ -35,25 +34,26 @@
                     @endforeach
                     </ul>
                     </td>
-                    <td class="quantity">{{ jadiRupiah($order->total)}}</td>
-                    <td class="quantity">{{($order->status==2 || $order->status==3) ? jadiRupiah(0) : jadiRupiah($order->total)}}</td>
+                    <td class="quantity">{{ price($order->total)}}</td>
+                    <td class="quantity">{{($order->status==2 || $order->status==3) ? price(0) : price($order->total)}}</td>
                     <td class="price">{{ $order->noResi}}</td>
-                    <td class="total">@if($order->status==0)
-                      <span class="label label-warning">Pending</span>
-                      @elseif($order->status==1)
-                      <span class="label label-important">Konfirmasi diterima</span>
-                      @elseif($order->status==2)
-                      <span class="label label-info">Pembayaran diterima</span>
-                      @elseif($order->status==3)
-                      <span class="label label-info">Terkirim</span>
-                      @elseif($order->status==4)
-                      <span class="label label-info">Batal</span>
-                      @endif</td>
-                    <td class="remove-update">
-                    <a href="{{URL::to('konfirmasiorder/'.$order->id)}}" class="tip update" title="Konfirmasi Pembayaran"><img src="{{URL::to(dirTemaToko().'tender/assets/images/update.png')}}" alt=""></a></td>  
+                    <td class="total">
+                        @if($order->status==0)
+                        <span class="label label-warning">Pending</span>
+                        @elseif($order->status==1)
+                        <span class="label label-important">Konfirmasi diterima</span>
+                        @elseif($order->status==2)
+                        <span class="label label-info">Pembayaran diterima</span>
+                        @elseif($order->status==3)
+                        <span class="label label-success">Terkirim</span>
+                        @elseif($order->status==4)
+                        <span class="label label-default">Batal</span>
+                        @endif
+                    </td>
                   </tr>
 
                 </table>
+                </div>
                 
                 @if($paymentinfo!=null)
             		<h3><center>Paypal Payment Details</center></h3>
@@ -127,9 +127,9 @@
 							</fieldset>
 						</div>
 						<div class="pull-right" style="float:right">
-						&nbsp;
-						<input type="Submit" class="submit" value="Konfirmasi Order">
-						<div style="clear:both; display:block; height:40px"></div>
+                            &nbsp;
+                            <input type="Submit" class="submit" value="Konfirmasi Order">
+                            <div style="clear:both; display:block; height:40px"></div>
 						</div>
 					{{Form::close()}}
 				@endif
@@ -139,6 +139,5 @@
 	            	<p>Silakan melakukan pembayaran dengan paypal Anda secara online via paypal payment gateway. Transaksi ini berlaku jika pembayaran dilakukan sebelum {{$expired}}. Klik tombol "Bayar Dengan Paypal" di bawah untuk melanjutkan proses pembayaran.</p>
 	            	{{$paypalbutton}}
             	@endif
-
             
         </div><!--end:container-2-->

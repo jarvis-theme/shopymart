@@ -7,8 +7,14 @@
 					@if (Shpcart::wishlist()->contents())
 						@foreach (Shpcart::wishlist()->contents() as $key => $cart)
 						<tr>
-							<td class="image"><a href="#"><img width="60" height="60" src="{{URL::to(getPrefixDomain().'/produk/'.$cart['image'])}}" alt="product" title="product"></a></td>
-							<td class="name"><a href="#">{{$cart['name']}}</a></td>
+							<td class="image">
+								<a href="{{URL::to('produk/'.Str::slug($cart['name']))}}">
+									<img width="60" height="60" src="{{URL::to(getPrefixDomain().'/produk/'.$cart['image'])}}" alt="product" title="product">
+								</a>
+							</td>
+							<td class="name">
+								<a href="{{URL::to('produk/'.Str::slug($cart['name']))}}">{{$cart['name']}}</a>
+							</td>
 							<td class="quantity">{{ $cart['qty']}}</td>
 						</tr>
 						@endforeach

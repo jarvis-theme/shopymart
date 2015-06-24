@@ -29,10 +29,14 @@
     </section>
     <aside class="sidebar">
     	<div class="side">
-        	<h4>Banner</h4>
-          @foreach(getBanner(1) as $item)
-              <div><a href="{{URL::to($item->url)}}"><img src="{{URL::to(getPrefixDomain().'/galeri/'.$item->gambar)}}" /></a></div>
-          @endforeach
-        </div><!--end:side-->
+      	<h4>Banner</h4>
+        @foreach(vertical_banner() as $item)
+        <div>
+          <a href="{{URL::to($item->url)}}">
+            <img src="{{URL::to(banner_image_url($item->gambar))}}" />
+          </a>
+        </div>
+        @endforeach
+      </div><!--end:side-->
     </aside>
 </div><!--end:container-2-->

@@ -16,26 +16,29 @@
 				</span>
 			</div>
 			<ul id="products" class="list clearfix">
-				@foreach($produk as $myproduk)
-					<li class="da-thumbs">
+				@foreach(list_product(Input::get('show'), @$category) as $myproduk)
+				<li class="da-thumbs">
 					<div class="product-thumb-hover">
 						<section class="left">
-							<a href="{{slugProduk($myproduk)}}">{{HTML::image(getPrefixDomain().'/produk/'.$myproduk->gambar1, $myproduk->nama, array('class="img1" style="width:100%;"'))}}</a>
+							<a href="{{product_url($myproduk)}}">
+								{{HTML::image(product_image_url($myproduk->gambar1), $myproduk->nama, array('class'=>"img1", "style"=>"width:100%;"))}}
+							</a>
 							@if(is_terlaris($myproduk))
 								<p class="sale">HOT</p>
-							@endif
-							@if(is_produkbaru($myproduk))
-								<p class="new">NEW</p>
-							@endif
-							@if(is_outstok($myproduk))
-								<p class="out">Out Stock</p>
+							@else
+								@if(is_produkbaru($myproduk))
+									<p class="new">NEW</p>
+								@elseif(is_outstok($myproduk))
+									<p class="out">Out Stock</p>
+								@endif
 							@endif
 							
 							<article class="da-animate da-slideFromRight" style="display: block;">
 								<h3>{{$myproduk->nama}}</h3>
 								<p>
-								<a href="{{slugProduk($myproduk)}}" class="link tip" title="View Detail"></a>&nbsp;
-								<a href="{{URL::to(getPrefixDomain().'/produk/'.$myproduk->gambar1)}}" rel="prettyPhoto[gallery1]" class="zoom tip" title="Zoom" ></a></p>
+									<a href="{{product_url($myproduk)}}" class="link tip" title="View Detail"></a>&nbsp;
+									<a href="{{URL::to(product_image_url($myproduk->gambar1,'large'))}}" rel="prettyPhoto[gallery1]" class="zoom tip" title="Zoom" ></a>
+								</p>
 							</article>
 						</section>
 					</div>
@@ -44,17 +47,17 @@
 						<!--<em>Category: <a href="#">Men's Dress</a></em>-->
 					</section>
 					<section class="right">
-						<span class="price"><small>{{jadiRupiah($myproduk->hargaCoret, false)}}</small>&nbsp;&nbsp; {{jadiRupiah($myproduk->hargaJual)}}</span>
+						<span class="price"><small>{{price($myproduk->hargaCoret, false)}}</small>&nbsp;&nbsp; {{price($myproduk->hargaJual)}}</span>
 						<ul class="menu-button">
-							<li><a href="{{URL::to(getPrefixDomain().'/produk/'.$myproduk->gambar1)}}" rel="prettyPhoto[gallery1]" class="zoom tip" title="Zoom"></a></li>
-							<li><a href="{{slugProduk($myproduk)}}" class="link tip" title="View Detail"></a></li>
+							<li><a href="{{URL::to(product_image_url($myproduk->gambar1,'large'))}}" rel="prettyPhoto[gallery1]" class="zoom tip" title="Zoom"></a></li>
+							<li><a href="{{product_url($myproduk)}}" class="link tip" title="View Detail"></a></li>
 						</ul>
 					</section>
-					</li>
+				</li>
 				@endforeach
 			</ul><!--end:products-->
 			<ul id="pagination">
-				{{$produk->links()}}
+				{{list_product(Input::get('show'), @$category)->links()}}
 			</ul>
 		</section>
 		<aside class="sidebar">
@@ -64,29 +67,33 @@
 				{{generateKategori($kategori,'<li>;</li>','',';',true)}}
 				</ul>
 			</div><!--end:side-->
-			@if(count($bestseller) > 0)
+			@if(count(best_seller()) > 0)
 			<div class="side">
 				<h4>Bestsellers</h4>
-				@foreach ($bestseller as $item)
+				@foreach (best_seller() as $item)
 				<div class="entry">
 					<div class="da-thumbs">
 						<div>
-							{{HTML::image(getPrefixDomain().'/produk/thumb/'.$item->gambar1)}}
+							{{HTML::image(product_image_url($item->gambar1,'thumb'))}}
 							<article class="da-animate da-slideFromRight" style="display: block;">
-								<p><a href="{{slugProduk($item)}}" class="link"></a></p>
+								<p><a href="{{product_url($item)}}" class="link"></a></p>
 							</article>
 						</div>
 					</div>
-					<h3><a href="{{slugProduk($item)}}">{{$item->nama}}</a></h3>
-					<small>{{jadiRupiah($item->hargaJual)}}</small>
+					<h3><a href="{{product_url($item)}}">{{$item->nama}}</a></h3>
+					<small>{{price($item->hargaJual)}}</small>
 				</div>
 				@endforeach
 			</div><!--end:side-->
 			@endif
 			<div class="side">
 				<h4>Banner</h4>
-				@foreach(getBanner(1) as $item)
-					<div><a href="{{URL::to($item->url)}}"><img src="{{URL::to(getPrefixDomain().'/galeri/'.$item->gambar)}}" /></a></div>
+				@foreach(vertical_banner() as $item)
+				<div>
+					<a href="{{URL::to($item->url)}}">
+						<img src="{{URL::to(banner_image_url($item->gambar))}}" />
+					</a>
+				</div>
 				@endforeach
 			</div><!--end:side-->
 		</aside>

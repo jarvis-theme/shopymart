@@ -1,4 +1,10 @@
-<div class="container">
+@if(Session::has('message'))
+<div class="{{Session::get('message')}}" id='message' style='display:none'>
+	<p>{{Session::get('text')}}</p>
+</div>
+@endif
+
+		<div class="container">
 
 			<!-- Checkout Page -->
 			<section class="order">
@@ -134,8 +140,3 @@
 
 			</section>
 		</div>
-@if(Session::has('message'))
-<div class="{{Session::get('message')}}" id='message' style='display:none'>
-	<p>{{Session::get('text')}}</p>					
-</div>
-@endif

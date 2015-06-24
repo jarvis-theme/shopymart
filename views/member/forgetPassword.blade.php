@@ -50,29 +50,22 @@
 		<aside class="sidebar">
 			<div class="side">
 				<h4>Banner</h4>
-				@foreach(getBanner(1) as $item)
+				@foreach(vertical_banner() as $item)
 				<div>
 					<a href="{{URL::to($item->url)}}">
-						<img src="{{URL::to(getPrefixDomain().'/galeri/'.$item->gambar)}}" />
+						<img src="{{URL::to(banner_image_url($item->gambar))}}" />
 					</a>
 				</div>
 				@endforeach
 			</div><!--end:side-->
 			<!-- <div class="side">
 				<h4>Our Customer Love Us!</h4>
-				<ul class="fade">                   
-					<li class="feed">Easy shopping experience! Pricing is attractive! Lots of styles to choose from and great pics!<br>
-						<small><a href="#">&mdash; Louie Jie Mahusay</a></small>
-					</li>
-					<li class="feed">Easy shopping experience! Pricing is attractive! Lots of styles to choose from and great pics!<br>
-						<small><a href="#">&mdash; Louie Jie Mahusay</a></small>
-					</li>
-					<li class="feed">Easy shopping experience! Pricing is attractive! Lots of styles to choose from and great pics!<br>
-						<small><a href="#">&mdash; Louie Jie Mahusay</a></small>    
-					</li>
-					<li class="feed">Easy shopping experience! Pricing is attractive! Lots of styles to choose from and great pics!<br>
-						<small><a href="#">&mdash; Louie Jie Mahusay</a></small>
-					</li>
+				<ul class="fade">
+					@foreach(list_testimonial() as $testimonial)
+					<li class="feed">{{short_description($testimonial->isi,80)}}<br>
+						<small><a href="#">&mdash; {{($testimonial->nama)}}</a></small>
+					</li><br>
+					@endforeach
 				</ul>
 			</div> -->
 		</aside>

@@ -21,7 +21,7 @@
 			<div class="side" >
 				<h4>Testimonial Kita !</h4>
 				<ul class="fade"> 
-					@foreach ($testimonial as $items)  
+					@foreach (list_testimonial() as $items)  
 					<blockquote class="quote" style="margin-bottom: 10px;">
 						<p>{{$items->isi}}</p>
 						<small><a href="#">&mdash; {{$items->nama}}</a></small>
@@ -29,7 +29,7 @@
 					@endforeach
 				</ul>
 				<ul id="pagination">
-					{{$testimonial->links()}}
+					{{list_testimonial()->links()}}
 				</ul>
 			</div>
 
@@ -49,8 +49,12 @@
 		<aside class="sidebar">
 			<div class="side">
 				<h4>Banner</h4>
-				@foreach(getBanner(1) as $item)
-				<div><a href="{{URL::to($item->url)}}"><img src="{{URL::to(getPrefixDomain().'/galeri/'.$item->gambar)}}" /></a></div>
+				@foreach(vertical_banner() as $item)
+				<div>
+					<a href="{{URL::to($item->url)}}">
+						<img src="{{URL::to(banner_image_url($item->gambar))}}" />
+					</a>
+				</div>
 				@endforeach
 			</div><!--end:side-->
 		</aside>

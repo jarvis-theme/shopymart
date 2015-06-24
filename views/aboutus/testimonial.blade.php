@@ -11,7 +11,7 @@
 			<div class="row-fluid">
 				<div class="span8 list">
 
-					@foreach($data as $key=>$value)
+					@foreach(list_testimonial() as $key=>$value)
 					<article>
 						<a href="#"><h4>{{$value->nama}}</h4></a>
 						<p><small class="date"><i class="icon-calendar"></i> {{date("d M Y", strtotime($value->updated_at))}}</small> </p>

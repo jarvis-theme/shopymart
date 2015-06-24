@@ -8,7 +8,7 @@
 					<li class="nav-one"><a href="#account" >My Accounts</a></li>
 				</ul>
 				<div class="list-wrap myaccount">
-					<div id="order" >
+					<div id="order" class="table-responsive">
 						<table class="shopping-cart">
 							<tr>
 								<th class="image">ID Order</th>
@@ -31,7 +31,7 @@
 										@endforeach
 									</ul>
 								</td>
-								<td class="quantity">{{ jadiRupiah($item->total)}}</td>
+								<td class="quantity">{{ price($item->total)}}</td>
 								<td class="price">{{ $item->noResi}}</td>
 								<td class="total">
 									@if($item->status==0)
@@ -44,10 +44,10 @@
 									<span class="label label-info">Pembayaran diterima</span>
 
 									@elseif($item->status==3)
-									<span class="label label-info">Terkirim</span>
+									<span class="label label-success">Terkirim</span>
 
 									@elseif($item->status==4)
-									<span class="label label-info">Batal</span>
+									<span class="label label-default">Batal</span>
 									@endif
 								</td>
 								<td class="remove-update">
@@ -105,7 +105,7 @@
 								<div class="control-group">
 									<label class="control-label"> Alamat:</label>
 									<div class="controls">
-										<textarea class="span6" name='alamat' required>{{$user->alamat}}</textarea>
+										<textarea class="span6" name='alamat' rows="8" cols="28" required>{{$user->alamat}}</textarea>
 									</div>
 								</div>
 								<div class="control-group">
@@ -113,7 +113,7 @@
 										<span class="red">*</span>Kode Pos:
 									</label>
 									<div class="controls">
-										<input type="text"  class="input-xlarge" name='kodepos' value='{{$user->kodepos}}' required>
+										<input type="text" class="input-xlarge" name='kodepos' value='{{$user->kodepos}}' required>
 									</div>
 								</div>
 								<div class="control-group">

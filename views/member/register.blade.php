@@ -45,13 +45,13 @@
 						<div class="control-group">
 							<label for="select01" class="control-label"><span class="red">*</span>Negara:</label>
 							<div class="controls">
-								{{Form::select('negara',array('' => '-- Pilih Negara --') + $negara,Input::old(''),array('required', 'id="negara" data-rel="chosen" class="span3"'))}}
+								{{Form::select('negara',array('' => '-- Pilih Negara --') + $negara,Input::old(''),array('required', "id"=>"negara", "data-rel"=>"chosen", "class"=>"span3"))}}
 							</div>
 						</div>
 						<div class="control-group">
 							<label class="control-label"><span class="red">*</span>Provinsi:</label>
 							<div class="controls">
-								{{Form::select('provinsi',array('' => '-- Pilih Provinsi --'), Input::old("provinsi"),array('required', 'id="provinsi" data-rel="chosen" class="span3"'))}}
+								{{Form::select('provinsi',array('' => '-- Pilih Provinsi --'), Input::old("provinsi"),array('required', "id"=>"provinsi", "data-rel"=>"chosen", "class"=>"span3"))}}
 							</div>
 						</div>
 						 <div class="control-group">
@@ -63,7 +63,7 @@
 						<div class="control-group">
 							<label class="control-label"> Alamat:</label>
 							<div class="controls">
-								<textarea class="span6" name='alamat' required>{{Input::old("alamat")}}</textarea>
+								<textarea class="input-xlarge" name='alamat' rows="4" cols="28" required>{{Input::old("alamat")}}</textarea>
 							</div>
 						</div>
 						<div class="control-group">
@@ -102,7 +102,7 @@
 							</div>
 						</div>
 						<div class="control-group">
-							<label  class="control-label"><span class="red">*</span> Password Confirm::</label>
+							<label  class="control-label"><span class="red">*</span> Password Confirm:</label>
 							<div class="controls">
 								<input type="password" type="password" name="password_confirmation" required  class="input-xlarge">
 							</div>
@@ -122,25 +122,22 @@
 		<aside class="sidebar">
 			<div class="side">
 				<h4>Banner</h4>
-				@foreach(getBanner(1) as $item)
-				<div><a href="{{URL::to($item->url)}}"><img src="{{URL::to(getPrefixDomain().'/galeri/'.$item->gambar)}}" /></a></div>
+				@foreach(vertical_banner() as $item)
+				<div>
+					<a href="{{URL::to($item->url)}}">
+						<img src="{{URL::to(banner_image_url($item->gambar))}}" />
+					</a>
+				</div>
 				@endforeach
 			</div><!--end:side-->
 			<div class="side">
 				<h4>Our Customer Love Us!</h4>
-				<ul class="fade">					
-					<li class="feed">Easy shopping experience! Pricing is attractive! Lots of styles to choose from and great pics!<br>
-						<small><a href="#">&mdash; Louie Jie Mahusay</a></small>
-					</li>
-					<li class="feed">Easy shopping experience! Pricing is attractive! Lots of styles to choose from and great pics!<br>
-						<small><a href="#">&mdash; Louie Jie Mahusay</a></small>
-					</li>
-					<li class="feed">Easy shopping experience! Pricing is attractive! Lots of styles to choose from and great pics!<br>
-						<small><a href="#">&mdash; Louie Jie Mahusay</a></small>	
-					</li>
-					<li class="feed">Easy shopping experience! Pricing is attractive! Lots of styles to choose from and great pics!<br>
-						<small><a href="#">&mdash; Louie Jie Mahusay</a></small>
-					</li>
+				<ul class="fade">
+					@foreach(list_testimonial() as $testimonial)
+					<li class="feed">{{short_description($testimonial->isi,80)}}<br>
+						<small><a href="#">&mdash; {{($testimonial->nama)}}</a></small>
+					</li><br>
+					@endforeach
 				</ul>
 			</div>
 		</aside>

@@ -3,23 +3,25 @@
 		<div style="clear:both; display:block; height:40px"></div>
 		<div class="prod">
 			<div class="clearfix"> 
-				<a href="{{URL::to(getPrefixDomain().'/produk/'.$produk->gambar1)}}" class="jqzoom" rel='gal1'  title="triumph" style=""> <img src="{{URL::to(getPrefixDomain().'/produk/'.$produk->gambar1)}}" style="width:100%;border: 4px solid #e5e5e5;"> </a>
+				<a href="{{URL::to(product_image_url($produk->gambar1))}}" class="jqzoom" rel='gal1'  title="triumph">
+					<img src="{{URL::to(product_image_url($produk->gambar1,'large'))}}" style="width:100%;border: 4px solid #e5e5e5;">
+				</a>
 			</div>
 			<div class="clearfix" >
 				<ul id="thumblist" class="clearfix" >
 				@if($produk->gambar1!='')
 					<li>
-						<a class="zoomThumbActive" href='javascript:void(0);' rel="{gallery: 'gal1', smallimage: '../{{getPrefixDomain().'/produk/'.$produk->gambar1}}',largeimage: '../{{getPrefixDomain().'/produk/'.$produk->gambar1}}'}"><img src="{{URL::to(getPrefixDomain().'/produk/'.$produk->gambar1)}}"></a>
+						<a class="zoomThumbActive" href='javascript:void(0);' rel="{gallery: 'gal1', smallimage: '{{URL::to(product_image_url($produk->gambar1))}}',largeimage: '{{URL::to(product_image_url($produk->gambar1))}}'}"><img src="{{URL::to(product_image_url($produk->gambar1,'large'))}}"></a>
 					</li>
 				@endif
 				@if($produk->gambar2!='')
-					<li><a href='javascript:void(0);' rel="{gallery: 'gal1', smallimage: '../{{getPrefixDomain().'/produk/'.$produk->gambar2}}',largeimage: '../{{getPrefixDomain().'/produk/'.$produk->gambar2}}'}"><img src="{{URL::to(getPrefixDomain().'/produk/'.$produk->gambar2)}}"></a></li>
+					<li><a href='javascript:void(0);' rel="{gallery: 'gal1', smallimage: '{{URL::to(product_image_url($produk->gambar2))}}',largeimage: '{{URL::to(product_image_url($produk->gambar2))}}'}"><img src="{{URL::to(product_image_url($produk->gambar2,'large'))}}"></a></li>
 				@endif
 				@if($produk->gambar3!='')
-					<li><a  href='javascript:void(0);' rel="{gallery: 'gal1', smallimage: '../{{getPrefixDomain().'/produk/'.$produk->gambar3}}',largeimage: '../{{getPrefixDomain().'/produk/'.$produk->gambar3}}'}"><img src="{{URL::to(getPrefixDomain().'/produk/'.$produk->gambar3)}}"></a></li>
+					<li><a  href='javascript:void(0);' rel="{gallery: 'gal1', smallimage: '{{URL::to(product_image_url($produk->gambar3))}}',largeimage: '{{URL::to(product_image_url($produk->gambar3))}}'}"><img src="{{URL::to(product_image_url($produk->gambar3,'large'))}}"></a></li>
 				@endif
 				@if($produk->gambar4!='')
-					<li><a  href='javascript:void(0);' rel="{gallery: 'gal1', smallimage: '../{{getPrefixDomain().'/produk/'.$produk->gambar4}}',largeimage: '../{{getPrefixDomain().'/produk/'.$produk->gambar4}}'}"><img src="{{URL::to(getPrefixDomain().'/produk/'.$produk->gambar4)}}"></a></li>
+					<li><a  href='javascript:void(0);' rel="{gallery: 'gal1', smallimage: '../{{URL::to(product_image_url($produk->gambar4))}}',largeimage: '{{URL::to(product_image_url($produk->gambar4))}}'}"><img src="{{URL::to(product_image_url($produk->gambar4,'large'))}}"></a></li>
 				@endif
 				</ul>
 			</div>
@@ -27,18 +29,19 @@
 		<div class="prod-detail">
 			<form action="#" id='addorder'>
 			<h2>{{$produk->nama}}</h2>
-			<span class="price">{{ jadiRUpiah($produk->hargaJual) }}</span>
+			<div style="margin-bottom: 15px">{{sosialShare(product_url($produk))}}</div>
+			<span class="price">{{ price($produk->hargaJual) }}</span>
 			<br>
-			@if($opsiproduk->count()>0)					
+			@if($opsiproduk->count() > 0)					
 				<select name="opsiproduk">
 					<option value="">-- Pilih Opsi --</option>
 					@foreach ($opsiproduk as $key => $opsi)
 					<option value="{{$opsi->id}}" {{ $opsi->stok==0 ? 'disabled':''}} >				
-						{{$opsi->opsi1.($opsi->opsi2=='' ? '':' / '.$opsi->opsi2).($opsi->opsi3=='' ? '':' / '.$opsi->opsi3)}} {{jadiRupiah($opsi->harga)}}				
+						{{$opsi->opsi1.($opsi->opsi2=='' ? '':' / '.$opsi->opsi2).($opsi->opsi3=='' ? '':' / '.$opsi->opsi3)}} {{price($opsi->harga)}}				
 					</option>
 					@endforeach
 				</select>
-				</p>
+				<!-- </p> -->
 			@endif  
 			<p>Jumlah : <input type="text" placeholder="qty" class="span1" name='qty' value="1"></p>                     
 			<span class="cart-button"><button type="submit" style="cursor: pointer;" class="add_cart">Tambah Ke Keranjang</button></span>
@@ -49,7 +52,7 @@
 					<li class="nav-two"><a href="#detail">Detail</a></li>
 					<li class="nav-three"><a href="#reviews">Reviews</a></li>
 					<li class="nav-four"><a href="#tags">Tags</a></li>
-					<li class="nav-five last"><a href="#share">Share</a></li>
+					<!-- <li class="nav-five last"><a href="#share">Share</a></li> -->
 				</ul>
 				<div class="list-wrap">
 					<div id="desc">
@@ -61,48 +64,40 @@
 						<li><span>Vendor:</span> {{$produk->vendor}}</li>
 					</ul>
 					<div id="reviews" class="hide" style="min-height: 110px;">
-						<form action="#">
-							<fieldset>
-								{{$fbscript}}
-								{{fbcommentbox(slugProduk($produk), '500px', '5', 'light')}}
-							</fieldset>
-						</form>
+						{{pluginTrustklik()}}
 					</div> 
 					<ul id="tags" class="hide">
 						{{getTagsProduk('<li><a href="#"></a></li>',$produk->tags,',');}}
 					</ul>
 					<div id="share" class="hide">
-						<iframe src="//www.facebook.com/plugins/share_button.php?href={{URL::to(slugProduk($produk))}}&amp;layout=button" scrolling="no" frameborder="0" style="border:none; overflow:hidden;height:20px;width:70px;" allowTransparency="true"></iframe>
-						<a class="twitter-share-button" href="https://twitter.com/share" data-count="none">Tweet </a>
-						<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 					</div>
 				</div>
 			</div>
 		</div><!--prodetail-->
-		@if(count($produklain) > 0)
+        @if(count(other_product($produk)) > 0)
 		<div class="relatedprod">
 			<h4>Related Products</h4>
-			@foreach($produklain as $key => $myproduk)
-			@if($key==0)
+			@foreach(other_product($produk) as $key => $myproduk)
+				@if($key==0)
 				<div class="entry first">
-			@else
+				@else
 				<div class="entry">
-			@endif
+				@endif
 				<div class="da-thumbs">
 					<div class="div-related">
-						{{HTML::image(getPrefixDomain().'/produk/'.$myproduk->gambar1, $myproduk->nama)}}
+						{{HTML::image(product_image_url($myproduk->gambar1), $myproduk->nama)}}
 						<article class="da-animate da-slideFromRight" style="display: block;">
 							<p>
-								<a href="{{slugProduk($myproduk)}}" class="link tip" title="View Detail"></a>&nbsp;
-								<a href="{{URL::to(getPrefixDomain().'/produk/'.$myproduk->gambar1)}}" rel="prettyPhoto[gallery1]" class="zoom tip" title="Zoom" ></a>
+								<a href="{{product_url($myproduk)}}" class="link tip" title="View Detail"></a>&nbsp;
+								<a href="{{URL::to(product_image_url($myproduk->gambar1,'large'))}}" rel="prettyPhoto[gallery1]" class="zoom tip" title="Zoom" ></a>
 							</p>
 						</article>
 					</div>
 				</div>
-				<h3><a href="{{slugProduk($myproduk)}}">{{$myproduk->nama}}</a></h3>
-				<span>{{jadiRupiah($myproduk->hargaJual)}}</span>
-			 </div>
-			 @endforeach
+				<h3><a href="{{product_url($myproduk)}}">{{$myproduk->nama}}</a></h3>
+				<span>{{price($myproduk->hargaJual)}}</span>
+			</div>
+			@endforeach
 		</div>
 		@endif
 	</div>

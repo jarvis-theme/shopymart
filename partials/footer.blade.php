@@ -1,24 +1,25 @@
 <div class="container-2">
 	<div style="clear:both; display:block; height:40px"></div>
-		<div class="one-third first">
-			<h4>About Us</h4>
-			<p> {{shortDescription($aboutUs[1]->isi,300)}} </p>
-		</div>
-		<div class="one-third">
-			<!-- <div class='tweet query'></div> -->
-			<h4>Posting Terbaru</h4>
-			<ul style="list-style: none;">
-			@foreach ($blogBaru as $items)
-				<li><a href="{{slugBlog($items)}}">{{$items->judul}}</a><br /><small>&mdash; diposting pada {{waktuTgl($items->created_at)}}</small></li>
+	<div class="one-third first">
+		<h4>About Us</h4>
+		<p> {{shortDescription($aboutUs[1]->isi,300)}} </p>
+	</div>
+	<div class="one-third">
+		<!-- <div class='tweet query'></div> -->
+		<h4>Posting Terbaru</h4>
+		<ul style="list-style: none;">
+			@foreach (list_blog(3) as $items)
+			<li><a href="{{blog_url($items)}}">{{$items->judul}}</a><br /><small>&mdash; diposting pada {{waktuTgl($items->created_at)}}</small></li>
 			@endforeach
-			</ul>
-		</div>
-		<div class="one-third">
-			@if($kontak->fb)
-			<div class="fb-like-box" data-href="{{$kontak->fb}}" data-width="280" data-show-faces="true" data-stream="false" data-border-color="#e5e5e5" data-header="false"></div>
-			@endif
-		</div>
-	</div><!--end:container-2-->
+		</ul>
+	</div>
+	<div class="one-third">
+		@if($kontak->fb)
+		{{facebookWidget($kontak)}}
+		@endif
+	</div>
+</div>
+<div class="content-wrap">
 	<div class="container-2">
 		<div style="clear:both; display:block; height:40px"></div>
 		<div class="ship">
@@ -27,7 +28,17 @@
 				<span>Alamat: </span><br>
 				<span>{{$kontak->alamat}} </span><br>
 				<span>Telepon: </span><br>
-				<span>{{$kontak->telepon}}</span><br><br>
+				@if($kontak->telepon && $kontak->hp)
+				<span>{{$kontak->telepon}} - {{$kontak->hp}}</span><br><br>
+				@else
+					@if($kontak->telepon)
+					<span>{{$kontak->telepon}}</span><br><br>
+					@elseif($kontak->hp)
+					<span>{{$kontak->hp}}</span><br><br>
+					@else
+					 - <br>
+					@endif
+				@endif
 			</div>
 		</div>
 		<div id="mc_embed_signup" class="subs">
@@ -39,8 +50,8 @@
 				</fieldset>
 			</form>
 		</div>
-	</div><!--end:container-2-->
-</div><!--end:content-wrap-->
+	</div>
+</div>
 
 <footer>
 	<div class="content-wrap">
@@ -48,19 +59,13 @@
 		<div class="one-fourth">
 			<h4>{{$group->nama}}</h4>                
 			<ul>
-			@foreach($group->link as $key=>$link)
+				@foreach($quickLink as $key=>$link)
+				@if($group->id == $link->tautanId)
 				<li>
-					@if($link->halaman=='1')
-						<a href={{"'".URL::to("halaman/".strtolower($link->linkTo))."'"}}>{{$link->nama}}</a>
-					@elseif($link->halaman=='2')
-						<a href={{"'".URL::to("blog/".strtolower($link->linkTo))."'"}}>{{$link->nama}}</a>
-					@elseif($link->url=='1')
-						<a href="http://{{strtolower($link->linkTo)}}">{{$link->nama}}</a>
-					@else
-						<a href={{"'".URL::to(strtolower($link->linkTo))."'"}}>{{$link->nama}}</a>
-					@endif
+					<a href="{{menu_url($link)}}">{{$link->nama}}</a>
 				</li>
-			@endforeach
+				@endif
+				@endforeach
 			</ul>
 		</div>
 		@endforeach 
@@ -68,35 +73,86 @@
 	<div class="content-wrap">
 		<div style="clear:both; display:block;" class="social-wrap"></div>
 		<ul class="social">
-
 			@if($kontak->fb)
-			<li><a href="{{URL::to($kontak->fb)}}" class="tip" title="Facebook"><img src="{{URL::to(dirTemaToko().'shopymart/assets/images/social-icon-facebook.png')}}" alt="Facebook"></a></li>
+			<li>
+				<a href="{{URL::to($kontak->fb)}}" class="tip" title="Facebook">
+					<div style="padding: 5px; width: 22px;">
+					<i class="fa fa-facebook" style="font-size: 16px; color: #fff; margin: 0px 5px;"></i>
+					</div>
+				</a>
+			</li>
 			@endif
-
-			@if($kontak->gp)
-			<li><a href="{{URL::to($kontak->gp)}}" class="tip" title="Google+"><img src="{{URL::to(dirTemaToko().'shopymart/assets/images/social-icon-dribbble.png')}}" alt="Google+"></a></li>
-			@endif
-
-			@if($kontak->ig)
-			<li><a href="{{URL::to($kontak->ig)}}" class="tip" title="Instagram"><img src="{{URL::to(dirTemaToko().'shopymart/assets/images/social-icon-flickr.png')}}" alt="Instagram"></a></li>
-			@endif
-
-			@if($kontak->pt)
-			<li><a href="{{URL::to($kontak->pt)}}" class="tip" title="Pinterest"><img src="{{URL::to(dirTemaToko().'shopymart/assets/images/social-icon-pinterest.png')}}" alt="Pinterest"></a></li>
-			@endif
-
 			@if($kontak->tw)
-			<li><a href="{{URL::to($kontak->tw)}}" class="tip" title="Twitter"><img src="{{URL::to(dirTemaToko().'shopymart/assets/images/social-icon-twitter.png')}}" alt="Twitter"></a></li>
+			<li>
+				<a href="{{URL::to($kontak->tw)}}" class="tip" title="Twitter">
+					<div style="padding: 5px; width: 22px;">
+						<i class="fa fa-twitter" style="font-size: 16px; color: #fff; margin: 0px 5px;"></i>
+					</div>
+				</a>
+			</li>
 			@endif
-
-		</ul>
-		<ul class="payment">
-			@if(!empty($bank))
-				@foreach($bank as $value)
-					<li><a class="tip" title="{{$value->name}}"><img src="{{URL::to('img/'.$value->bankdefault->logo)}}" alt="{{$value->name}}"></a></li>
-				@endforeach
+			@if($kontak->gp)
+			<li>
+				<a href="{{URL::to($kontak->gp)}}" class="tip" title="Google+">
+					<div style="padding: 5px; width: 22px;">
+						<i class="fa fa-google-plus" style="font-size: 16px; color: #fff; margin: 0px 5px;"></i>
+					</div>
+				</a>
+			</li>
+			@endif
+			@if($kontak->ig)
+			<li>
+				<a href="{{URL::to($kontak->ig)}}" class="tip" title="Instagram">
+					<div style="padding: 5px; width: 22px;">
+						<i class="fa fa-instagram" style="font-size: 16px; color: #fff; margin: 0px 5px;"></i>
+					</div>
+				</a>
+			</li>
+			@endif
+			@if($kontak->pt)
+			<li>
+				<a href="{{URL::to($kontak->pt)}}" class="tip" title="Pinterest">
+					<div style="padding: 5px; width: 22px;">
+						<i class="fa fa-pinterest" style="font-size: 16px; color: #fff; margin: 0px 5px;"></i>
+					</div>
+				</a>
+			</li>
+			@endif
+			@if($kontak->tl)
+			<li>
+				<a href="{{URL::to($kontak->tl)}}" class="tip" title="Tumblr">
+					<div style="padding: 5px; width: 22px;">
+						<i class="fa fa-tumblr" style="font-size: 16px; color: #fff; margin: 0px 5px;"></i>
+					</div>
+				</a>
+			</li>
 			@endif
 		</ul>
-		<p style="clear:both; display:block;">&copy; {{date('Y')}} <a href="{{URL::to('/')}}">{{ Theme::place('title') }}</a>. All Rights Reserved. Powered by <a href="{{URL::to('http://jarvis-store.com/welcome')}}">Jarvis Store</a></p>
+		<ul class="payment" style="width: 70%">
+			@foreach(list_banks() as $value)
+			<li>
+				<a class="tip" title="{{$value->bankdefault->nama}}">
+            		<img src="{{bank_logo($value)}}" alt="{{$value->name}}" />
+				</a>
+			</li>
+            @endforeach
+            @foreach(list_payments() as $pay)
+                @if($pay->nama == 'ipaymu' && $pay->aktif == 1)
+                <li>
+					<a class="tip" title="{{$pay->nama}}">
+                		<img src="{{url('img/bank/ipaymu.jpg')}}" alt="Ipaymu" />
+            		</a>
+            	</li>
+                @endif
+            @endforeach
+            @if(count(list_dokus()) > 0 && list_dokus()->status == 1)
+            <li>
+				<a class="tip">
+            		<img src="{{url('img/bank/doku.jpg')}}" alt="Doku" />
+        		</a>
+        	</li>
+            @endif
+		</ul>
+		<p style="clear:both; display:block;">&copy; {{date('Y')}} <a href="{{URL::to('/')}}">{{ Theme::place('title') }}</a>. All Rights Reserved. Powered by <a href="{{URL::to('http://jarvis-store.com/welcome')}}" target="_blank">Jarvis Store</a></p>
 	</div>
 </footer>
