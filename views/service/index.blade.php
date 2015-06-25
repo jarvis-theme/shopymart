@@ -1,4 +1,3 @@
- <div class="content-wrap">
 	<div style="clear:both; display:block; height:20px"></div>
 	<div id="intro">
 		<h3><a href="#">Layanan Pelanggan</a></h3>

@@ -1,5 +1,4 @@
-﻿<div class="content-wrap">
-	<div style="clear:both; display:block; height:20px"></div>
+﻿	<div style="clear:both; display:block; height:20px"></div>
 	<div class="container-2">
 		<section class="content">
 			@foreach(list_blog(null, @$blog_category) as $key=>$value)	

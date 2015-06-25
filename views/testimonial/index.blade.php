@@ -1,10 +1,10 @@
 @if(Session::has('msg'))
-<div class="success" id='message' style='display:none'>
+<div class="success" id='message' style='display:none; color:#fff;'>
 	<p>Terima kasih, testimonial anda sudah terkirim.</p>
 </div>
 @endif
 @if($errors->all())
-<div class="error" id='message' style='display:none'>
+<div class="error" id='message' style='display:none; color:#fff;'>
 	Terjadi kesalahan dalam menyimpan data.<br>
 	<ul>
 		@foreach($errors->all() as $message)
@@ -14,7 +14,6 @@
 </div>
 @endif
 
-<div class="content-wrap">
 	<div style="clear:both; display:block; height:20px"></div>
 	<div class="container-2">
 		<section class="content">
@@ -28,9 +27,7 @@
 					</blockquote>
 					@endforeach
 				</ul>
-				<ul id="pagination">
-					{{list_testimonial()->links()}}
-				</ul>
+				{{list_testimonial()->links()}}
 			</div>
 
 			<form action="{{URL::to('testimoni')}}" id="ajax-contact-form" class="contactForm" method="post">

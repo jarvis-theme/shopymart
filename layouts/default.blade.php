@@ -8,7 +8,9 @@
 	<body>
 		<div id="page_wrap">
 			{{ Theme::partial('header') }}	
-			{{ Theme::place('content') }}	
+			<div class="content-wrap">
+				{{ Theme::place('content') }}	
+			</div>
 			{{ Theme::partial('footer') }}	
 		</div>		
 		{{ Theme::partial('defaultjs') }}

@@ -1,4 +1,3 @@
-<div class="content-wrap">
 	<div style="clear:both; display:block; height:20px"></div>
 	<div class="container-2">
 		<section class="content">

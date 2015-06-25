@@ -8,7 +8,7 @@
 					<tr>
 						<td class="image">
 							<a href="{{URL::to('produk/'.Str::slug($cart['name']))}}">
-								<img width="60" height="60" src="{{URL::to(getPrefixDomain().'/produk/'.$cart['image'])}}" alt="product" title="product">
+								<img width="60" height="60" src="{{URL::to(product_image_url($cart['image']))}}" alt="product" title="product">
 							</a>
 						</td>
 						<td class="name"><a href="{{URL::to('produk/'.Str::slug($cart['name']))}}">{{$cart['name']}}</a></td>

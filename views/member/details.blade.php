@@ -1,4 +1,24 @@
-<div class="content-wrap">
+@if($errors->all())
+<div class="error" id='message' style='display:none'>
+  Kami menemukan error berikut:<br>
+  <ul>
+	@foreach($errors->all() as $message)
+	<li>{{ $message }}</li>
+	@endforeach
+  </ul>
+</div>
+@endif
+@if(Session::has('error'))
+<div class="error" id='message' style='display:none'>
+  Password lama anda tidak benar, silakan coba lagi.
+</div>
+@endif
+@if(Session::has('success'))
+<div class="success" id='message' style='display:none'>
+  Informasi anda berhasil di update.
+</div>
+@endif
+
 	<div style="clear:both; display:block; height:20px"></div>
 	<div class="container-2">
 		<section >
@@ -8,7 +28,8 @@
 					<li class="nav-one"><a href="#account" >My Accounts</a></li>
 				</ul>
 				<div class="list-wrap myaccount">
-					<div id="order" class="table-responsive">
+					<div id="order">
+						<div class="table-responsive">
 						<table class="shopping-cart">
 							<tr>
 								<th class="image">ID Order</th>
@@ -20,7 +41,7 @@
 								<th class="action">Action</th>
 							</tr>
 
-							@foreach ($order as $item)
+							@foreach (list_order() as $item)
 							<tr>
 								<td class="image">{{prefixOrder()}}{{$item->kodeOrder}}</td>
 								<td  class="name">{{waktu($item->tanggalOrder)}}</td>
@@ -56,6 +77,8 @@
 							</tr>
 							@endforeach
 						</table>
+						</div>
+                		{{list_order()->links()}} 
 						<h2>History Transaksi &nbsp;</h2>
 					</div>
 					<div id="account" class="hide">	
@@ -160,4 +183,4 @@
 		</div>
 	</section>		
 	<div style="clear:both; display:block; height:40px"></div>
-</div><!--end:container-2-->
+	</div><!--end:container-2-->

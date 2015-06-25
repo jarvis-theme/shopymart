@@ -9,7 +9,9 @@
 		<div id="page_wrap">
 			{{ Theme::partial('header') }}	
 			{{ Theme::partial('slider') }}	
-			{{ Theme::place('content') }}	
+			<div class="content-wrap">
+				{{ Theme::place('content') }}	
+			</div>
 			{{ Theme::partial('footer') }}	
 		</div>  
 		{{-- Theme::asset()->scripts() --}}	

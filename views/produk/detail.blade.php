@@ -1,4 +1,3 @@
-<div class="content-wrap">
 	<div class="container-2">
 		<div style="clear:both; display:block; height:40px"></div>
 		<div class="prod">

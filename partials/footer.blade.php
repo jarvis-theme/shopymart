@@ -1,58 +1,61 @@
-<div class="container-2">
-	<div style="clear:both; display:block; height:40px"></div>
-	<div class="one-third first">
-		<h4>About Us</h4>
-		<p> {{shortDescription($aboutUs[1]->isi,300)}} </p>
-	</div>
-	<div class="one-third">
-		<!-- <div class='tweet query'></div> -->
-		<h4>Posting Terbaru</h4>
-		<ul style="list-style: none;">
-			@foreach (list_blog(3) as $items)
-			<li><a href="{{blog_url($items)}}">{{$items->judul}}</a><br /><small>&mdash; diposting pada {{waktuTgl($items->created_at)}}</small></li>
-			@endforeach
-		</ul>
-	</div>
-	<div class="one-third">
-		@if($kontak->fb)
-		{{facebookWidget($kontak)}}
-		@endif
-	</div>
-</div>
 <div class="content-wrap">
 	<div class="container-2">
 		<div style="clear:both; display:block; height:40px"></div>
-		<div class="ship">
-			<a href="#"><img src="{{URL::to(dirTemaToko().'shopymart/assets/images/service-1.png')}}" alt=""></a>
-			<div style="margin-left:68px;">
-				<span>Alamat: </span><br>
-				<span>{{$kontak->alamat}} </span><br>
-				<span>Telepon: </span><br>
-				@if($kontak->telepon && $kontak->hp)
-				<span>{{$kontak->telepon}} - {{$kontak->hp}}</span><br><br>
-				@else
-					@if($kontak->telepon)
-					<span>{{$kontak->telepon}}</span><br><br>
-					@elseif($kontak->hp)
-					<span>{{$kontak->hp}}</span><br><br>
-					@else
-					 - <br>
-					@endif
-				@endif
-			</div>
+		<div class="one-third first">
+			<h4>About Us</h4>
+			<p> {{shortDescription($aboutUs[1]->isi,300)}} </p>
 		</div>
-		<div id="mc_embed_signup" class="subs">
-			<h4>Sign up for our Newsletter</h4>
-			<form action="{{@$mailing->action}}" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form newsletter" class="validate form-inline subscribes" target="_blank">
-				<fieldset>
-				  <input type="email" placeholder="Enter your email" name="EMAIL" class="subscribe input-medium required email" id="newsletter mce-EMAIL">
-				  <input type="submit" name="submit" value="Submit" class="submit" {{ @$mailing->action==''?'disabled="disabled"':'' }} />
-				</fieldset>
-			</form>
+		<div class="one-third">
+			<!-- <div class='tweet query'></div> -->
+			<h4>Posting Terbaru</h4>
+			<ul style="list-style: none;">
+				@foreach (list_blog(3) as $items)
+				<li><a href="{{blog_url($items)}}">{{$items->judul}}</a><br /><small>&mdash; diposting pada {{waktuTgl($items->created_at)}}</small></li>
+				@endforeach
+			</ul>
+		</div>
+		<div class="one-third">
+			@if($kontak->fb)
+			{{facebookWidget($kontak)}}
+			@endif
 		</div>
 	</div>
 </div>
-
+<div id="info">
+	<div class="content-wrap">
+		<div class="container-2">
+			<div style="clear:both; display:block; height:40px"></div>
+			<div class="ship">
+				<a href="#"><img src="{{URL::to(dirTemaToko().'shopymart/assets/images/service-1.png')}}" alt=""></a>
+				<div style="margin-left:68px;">
+					<span>Alamat: </span><br>
+					<span>{{$kontak->alamat}} </span><br>
+					<span>Telepon: </span><br>
+					@if($kontak->telepon && $kontak->hp)
+					<span>{{$kontak->telepon}} - {{$kontak->hp}}</span><br><br>
+					@else
+						@if($kontak->telepon)
+						<span>{{$kontak->telepon}}</span><br><br>
+						@elseif($kontak->hp)
+						<span>{{$kontak->hp}}</span><br><br>
+						@else
+						 - <br>
+						@endif
+					@endif
+				</div>
+			</div>
+			<div id="mc_embed_signup" class="subs">
+				<h4>Sign up for our Newsletter</h4>
+				<form action="{{@$mailing->action}}" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form newsletter" class="validate form-inline subscribes" target="_blank">
+					<fieldset>
+					  <input type="email" placeholder="Enter your email" name="EMAIL" class="subscribe input-medium required email" id="newsletter mce-EMAIL">
+					  <input type="submit" name="submit" value="Submit" class="submit" {{ @$mailing->action==''?'disabled="disabled"':'' }} />
+					</fieldset>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
 <footer>
 	<div class="content-wrap">
 		@foreach($tautan as $key=>$group)
@@ -76,8 +79,8 @@
 			@if($kontak->fb)
 			<li>
 				<a href="{{URL::to($kontak->fb)}}" class="tip" title="Facebook">
-					<div style="padding: 5px; width: 22px;">
-					<i class="fa fa-facebook" style="font-size: 16px; color: #fff; margin: 0px 5px;"></i>
+					<div class="sosmed">
+					<i class="fa fa-facebook color-icon"></i>
 					</div>
 				</a>
 			</li>
@@ -85,8 +88,8 @@
 			@if($kontak->tw)
 			<li>
 				<a href="{{URL::to($kontak->tw)}}" class="tip" title="Twitter">
-					<div style="padding: 5px; width: 22px;">
-						<i class="fa fa-twitter" style="font-size: 16px; color: #fff; margin: 0px 5px;"></i>
+					<div class="sosmed">
+						<i class="fa fa-twitter color-icon"></i>
 					</div>
 				</a>
 			</li>
@@ -94,8 +97,8 @@
 			@if($kontak->gp)
 			<li>
 				<a href="{{URL::to($kontak->gp)}}" class="tip" title="Google+">
-					<div style="padding: 5px; width: 22px;">
-						<i class="fa fa-google-plus" style="font-size: 16px; color: #fff; margin: 0px 5px;"></i>
+					<div class="sosmed">
+						<i class="fa fa-google-plus color-icon"></i>
 					</div>
 				</a>
 			</li>
@@ -103,8 +106,8 @@
 			@if($kontak->ig)
 			<li>
 				<a href="{{URL::to($kontak->ig)}}" class="tip" title="Instagram">
-					<div style="padding: 5px; width: 22px;">
-						<i class="fa fa-instagram" style="font-size: 16px; color: #fff; margin: 0px 5px;"></i>
+					<div class="sosmed">
+						<i class="fa fa-instagram color-icon"></i>
 					</div>
 				</a>
 			</li>
@@ -112,8 +115,8 @@
 			@if($kontak->pt)
 			<li>
 				<a href="{{URL::to($kontak->pt)}}" class="tip" title="Pinterest">
-					<div style="padding: 5px; width: 22px;">
-						<i class="fa fa-pinterest" style="font-size: 16px; color: #fff; margin: 0px 5px;"></i>
+					<div class="sosmed">
+						<i class="fa fa-pinterest color-icon"></i>
 					</div>
 				</a>
 			</li>
@@ -121,8 +124,8 @@
 			@if($kontak->tl)
 			<li>
 				<a href="{{URL::to($kontak->tl)}}" class="tip" title="Tumblr">
-					<div style="padding: 5px; width: 22px;">
-						<i class="fa fa-tumblr" style="font-size: 16px; color: #fff; margin: 0px 5px;"></i>
+					<div class="sosmed">
+						<i class="fa fa-tumblr color-icon"></i>
 					</div>
 				</a>
 			</li>

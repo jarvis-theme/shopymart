@@ -5,12 +5,12 @@
 @endif
 @if(Session::has('success'))
 <div class="success" id='message' style='display:none'>
-	<p>Selamat, anda sudah berhasil register. Silakan check email untuk mengetahui informasi akun anda.</p>					
+	<p style="color:#fff !important;">Selamat, anda sudah berhasil register. Silakan check email untuk mengetahui informasi akun anda.</p>					
 </div>
 @endif
 @if(Session::has('errorrecovery'))
 <div class="error" id='message' style='display:none'>
-	<p>Maaf, email anda tidak ditemukan.</p>					
+	<p style="color:#fff !important;">Maaf, email anda tidak ditemukan.</p>					
 </div>
 @endif	
 @if($errors->all())
@@ -30,7 +30,6 @@
 </div>
 @endif
 
-<div class="content-wrap">
 	<div style="clear:both; display:block; height:20px"></div>
 	<div class="container-2">
 		<section class="content">

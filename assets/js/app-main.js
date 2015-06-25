@@ -26,10 +26,16 @@ require.config({
 		},
 		"noty" : {
 			deps : ['jquery'],
+		},
+		"organictabs" : {
+			deps : ['jquery'],
+		},
+		"quovolver" : {
+			deps : ['jquery'],
 		}
 	},
     "waitSeconds" : 20,
-    urlArgs: "v=0012",
+    urlArgs: "v=001",
 
 	paths: {
 		// LIBRARY
@@ -48,7 +54,6 @@ require.config({
 		tipsy           : dirTema+'assets/js/lib/jquery.tipsy',
 		modernizr       : dirTema+'assets/js/lib/modernizr-1.7.min',
 		organictabs     : dirTema+'assets/js/lib/organictabs.jquery',
-		// productview     : dirTema+'assets/js/lib/productview',
 
 		// MAIN LIBRARY
 		router          : 'js/router',
@@ -58,7 +63,7 @@ require.config({
 
 		// CONTROLLER
 		home            : dirTema+'assets/js/pages/home',
-		// member          : dirTema+'assets/js/pages/member',
+		member          : dirTema+'assets/js/pages/member',
 		main            : dirTema+'assets/js/pages/default',
 		produk          : dirTema+'assets/js/pages/produk',
 	}
@@ -74,7 +79,7 @@ require([
 	router.define('home', 'home@run');
 
 	// MEMBER
-	// router.define('member/*', 'member@run');
+	router.define('member/*', 'member@run');
 
 	// PRODUK
 	router.define('produk/*', 'produk@run');

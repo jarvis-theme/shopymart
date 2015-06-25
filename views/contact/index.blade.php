@@ -1,15 +1,15 @@
 @if(Session::has('msg2'))
-<div class="success" id='message' style='display:none'>
+<div class="success" id='message'>
 	Terima kasih, pesan anda sudah terkirim.
 </div>
 @endif
 @if(Session::has('msg3'))
-<div class="success" id='message' style='display:none'>
+<div class="success" id='message'>
 	Maaf, pesan anda belum terkirim.
 </div>
 @endif
 @if($errors->all())
-<div class="error" id='message' style='display:none'>
+<div class="error" id='message'>
 	Terjadi kesalahan dalam menyimpan data.<br><br>
 	@foreach($errors->all() as $message)
 	-{{ $message }}<br>
@@ -18,7 +18,6 @@
 </div>
 @endif
 
-<div class="content-wrap">
 	<div style="clear:both; display:block; height:20px"></div>
 	<div class="container-2">
 		<section class="content">

@@ -131,7 +131,7 @@ form.signin input::-webkit-input-placeholder { color:#353535; font-size:11px;}
 form.signin .button { background:#f5640c; width:240px; border:0; color:#fff; padding:5px; -webkit-border-radius:2px;  -moz-border-radius:2px; -o-border-radius:2px; border-radius:2px; margin:10px 0; cursor:pointer;}
 form.signin .button:hover{ background:#252525; -ms-transition: all 0.5s ease-in-out; -webkit-transition: all 0.5s ease-in-out; -o-transition: all 0.5s ease-in-out; -moz-transition: all 0.5s ease-in-out; transition: all 0.5s ease-in-out;}
 
-#demo-header{ width: 125px; height:27px; float:right; position: relative; z-index:999; top:4px; margin-right:36px; }
+#demo-header{ width: 225px; height:27px; float:right; position: relative; z-index:999; top:4px; margin-right:36px; }
 #cart-link{  position: absolute; background:url(../images/icon-cart.png) no-repeat left center; top: 0px; right: 0px; padding-left:20px; display: block; color: #fff; font-size:12px;cursor: pointer;}
 #cart-panel{ position: absolute; top: 33px; right: -36px; width:250px; padding: 20px 15px 5px 15px; background:#fff; font-size: 12px; display: none; z-index:9999; float:left; border-bottom-left-radius: 4px; border-bottom-right-radius: 4px; border-bottom:1px solid #e5e5e5;}	
 #cart-panel .item-cart table{ width:100%; float:left; font-size:12px;}
@@ -476,8 +476,8 @@ background:
 #tab .nav2 li{ font-size:13px}
 #tab .nav2 li a{ padding:10px 10px;}
 #tab .myaccount ul{ display:block; margin-bottom:0;}
-#tab .myaccount ul li{ line-height:26px !important; display:block;}
-#tab .myaccount ul li a{ color:#757575; display:block; background:url(../images/iconlink.png) no-repeat left center; padding-left:15px;}
+/*#tab .myaccount ul li{ line-height:26px !important; display:block;}*/
+/*#tab .myaccount ul li a{ color:#757575; display:block; background:url(../images/iconlink.png) no-repeat left center; padding-left:15px;}*/
 
 /*checkoutbox*/
 #tab .checkoutbox{ width:96.5%; float:left;}
@@ -647,14 +647,14 @@ table.compare tr td.button a.addtocart{ float:left; background:#a3d464; width:16
 table.compare tr td.button a.remove{ float:left; background:#e76565; width:16px; height:17px !important; padding:9px; -webkit-border-radius: 30px; -khtml-border-radius: 30px; border-radius: 30px; margin-right:4px;}
 
 
-#pagination{ width:100%; float:left; margin-bottom:40px; }
-#pagination li{float: left; margin-right: 8px; list-style:none;}
-#pagination li a{ border:1px solid #f0f0f0; float:left; padding:2px 12px; color:#757575; -moz-border-radius: 2px; -webkit-border-radius: 2px; -khtml-border-radius: 2px; border-radius: 2px;}
-#pagination li span{ border:1px solid #f0f0f0; float:left; padding:2px 12px; color:#757575; -moz-border-radius: 2px; -webkit-border-radius: 2px; -khtml-border-radius: 2px; border-radius: 2px;}
-#pagination li.active span{ background:#f5640c; color:#fff; border:1px solid #f5640c; }
-#pagination li.active span:hover{ color:#fff !important;}
-#pagination li a.current{ background:#f5640c; color:#fff; border:1px solid #f5640c; }
-#pagination li a.current:hover{ color:#fff !important;}
+#pagination, .pagination{ width:100%; float:left; margin-bottom:40px; }
+#pagination li, .pagination li{float: left; margin-right: 8px; list-style:none;}
+#pagination li a, .pagination li a{ border:1px solid #f0f0f0; float:left; padding:2px 12px; color:#757575; -moz-border-radius: 2px; -webkit-border-radius: 2px; -khtml-border-radius: 2px; border-radius: 2px;}
+#pagination li span, .pagination li span{ border:1px solid #f0f0f0; float:left; padding:2px 12px; color:#757575; -moz-border-radius: 2px; -webkit-border-radius: 2px; -khtml-border-radius: 2px; border-radius: 2px;}
+#pagination li.active span, .pagination li.active span{ background:#f5640c; color:#fff; border:1px solid #f5640c; }
+#pagination li.active span:hover, .pagination li.active span:hover{ color:#fff !important;}
+#pagination li a.current, .pagination li a.current{ background:#f5640c; color:#fff; border:1px solid #f5640c; }
+#pagination li a.current:hover, .pagination li a.current:hover{ color:#fff !important;}
 
 /*-------------*/
 /*   SIDEBAR   */
@@ -902,3 +902,75 @@ ul.payment li a{ float:left; padding:0;}
 @media screen and (max-width: 959px){
 	section.content { background: transparent; }
 }
+#info { width: 100%;float: left;background: #FFF none repeat scroll 0% 0%; }
+.label {
+  display: inline;
+  padding: .2em .6em .3em;
+  font-size: 75%;
+  font-weight: bold;
+  line-height: 1;
+  color: #fff !important;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: .25em;
+}
+a.label:hover,
+a.label:focus {
+  color: #fff;
+  text-decoration: none;
+  cursor: pointer;
+}
+.label:empty {
+  display: none;
+}
+.btn .label {
+  position: relative;
+  top: -1px;
+}
+.label-default {
+  background-color: #777;
+}
+.label-default[href]:hover,
+.label-default[href]:focus {
+  background-color: #5e5e5e;
+}
+.label-primary {
+  background-color: #337ab7;
+}
+.label-primary[href]:hover,
+.label-primary[href]:focus {
+  background-color: #286090;
+}
+.label-success {
+  background-color: #5cb85c;
+}
+.label-success[href]:hover,
+.label-success[href]:focus {
+  background-color: #449d44;
+}
+.label-info {
+  background-color: #5bc0de;
+}
+.label-info[href]:hover,
+.label-info[href]:focus {
+  background-color: #31b0d5;
+}
+.label-warning {
+  background-color: #f0ad4e;
+}
+.label-warning[href]:hover,
+.label-warning[href]:focus {
+  background-color: #ec971f;
+}
+.label-danger {
+  background-color: #d9534f;
+}
+.label-danger[href]:hover,
+.label-danger[href]:focus {
+  background-color: #c9302c;
+}
+.sosmed { padding: 5px; width: 22px; }
+.color-icon { font-size: 16px !important; color: #fff !important; margin: 0px 5px; }
+#lod { position: absolute; margin-left: 10px; margin-top: 7px; }
+#reg { margin-bottom: 30px; }

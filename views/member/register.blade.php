@@ -8,7 +8,6 @@
 	</ul>
 </div>
 @endif
-
 @if(Session::has('error'))
 <div class="alert alert-error">
 	<h3>Kami menemukan error berikut:</h3>
@@ -16,10 +15,9 @@
 </div>
 @endif
 
-<div class="content-wrap">
 	<div style="clear:both; display:block; height:20px"></div>	
 	<div class="container-2">
-		<section class="content">
+		<section class="content" id="reg">
 			<h2>Register Account &nbsp;<small>Register your information details.</small></h2>
 			{{Form::open(array('url'=>'member','method'=>'post','class'=>'form-register'))}}
 				<h3>Your Personal Details</h3>
