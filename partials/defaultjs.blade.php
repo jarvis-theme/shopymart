@@ -17,4 +17,4 @@
 {{--generate_theme_js('shopymart/assets/js/lib/custom.js')--}}
 {{--generate_theme_js('shopymart/assets/js/lib/bootstrap.min.js')--}}
 
-<script data-main="http://{{Request::server('SERVER_NAME').'/'.dirTemaToko()}}shopymart/assets/js/app-main" src="/js/require.js"></script>
+<script data-main="{{url(dirTemaToko().'shopymart/assets/js/app-main')}}" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.22/require.min.js"></script>

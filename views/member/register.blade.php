@@ -1,20 +1,3 @@
-@if($errors->all())
-<div class="alert alert-error">
-	Kami menemukan error berikut:			
-	<ul>
-		@foreach($errors->all() as $message)
-		<li style="margin-left: 20px;">{{ $message }}</li>
-		@endforeach
-	</ul>
-</div>
-@endif
-@if(Session::has('error'))
-<div class="alert alert-error">
-	<h3>Kami menemukan error berikut:</h3>
-	<p>{{Session::get('error')}}</p>
-</div>
-@endif
-
 	<div style="clear:both; display:block; height:20px"></div>	
 	<div class="container-2">
 		<section class="content" id="reg">
@@ -43,19 +26,19 @@
 						<div class="control-group">
 							<label for="select01" class="control-label"><span class="red">*</span>Negara:</label>
 							<div class="controls">
-								{{Form::select('negara',array('' => '-- Pilih Negara --') + $negara,Input::old(''),array('required', "id"=>"negara", "data-rel"=>"chosen", "class"=>"span3"))}}
+								{{Form::select('negara',array('' => '-- Pilih Negara --') + $negara,Input::old('negara'),array('required', "id"=>"negara", "data-rel"=>"chosen", "class"=>"span3"))}}
 							</div>
 						</div>
 						<div class="control-group">
 							<label class="control-label"><span class="red">*</span>Provinsi:</label>
 							<div class="controls">
-								{{Form::select('provinsi',array('' => '-- Pilih Provinsi --'), Input::old("provinsi"),array('required', "id"=>"provinsi", "data-rel"=>"chosen", "class"=>"span3"))}}
+								{{Form::select('provinsi',array('' => '-- Pilih Provinsi --') + $provinsi, Input::old("provinsi"),array('required', "id"=>"provinsi", "data-rel"=>"chosen", "class"=>"span3"))}}
 							</div>
 						</div>
 						 <div class="control-group">
 							<label class="control-label"><span class="red">*</span>Kota:</label>
 							<div class="controls">
-								{{Form::select('kota',array('' => '-- Pilih Kota --'),Input::old("kota"), array('required'=>'','id'=>'kota', 'class'=>'span3'))}}
+								{{Form::select('kota',array('' => '-- Pilih Kota --') + $kota, Input::old("kota"), array('required'=>'','id'=>'kota', 'class'=>'span3'))}}
 							</div>
 						</div>
 						<div class="control-group">

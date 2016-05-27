@@ -1,10 +1,10 @@
 <header>
 	<div id="top">
-	  @if ( !is_login() )	
-		 <span>Selamat berbelanja</span>
-	  @else 	
-		<span>Selamat datang, {{HTML::link('member', user()->nama)}}</span>
-	  @endif	
+		@if ( !is_login() )	
+			<span>Selamat berbelanja</span>
+		@else 
+			<span>Selamat datang, {{HTML::link('member', user()->nama)}}</span>
+		@endif	
 	</div><!--end:top-->
 	<div id="top2">
 		<ul class="myaccountmenu">
@@ -32,7 +32,7 @@
 					<button class="submit button" type="button">Sign in</button>
 					<p>
 						<a class="forgot" href="#">Forgot your password?</a> / <a class="register" href="{{URL::to('member/create')}}">Create an Account</a>
-					</p>        
+					</p>
 				</fieldset>
 			</form>
 		</div>
@@ -42,7 +42,7 @@
 	@if(logo_image_url())	
 		<h1 style="margin:0px 25px 15px;">
 			<a href="{{URL::to('home')}}">
-				<img style="max-height: 180px;float:left;margin:1%" src="{{URL::to(logo_image_url())}}" />
+				<img class="logos" src="{{URL::to(logo_image_url())}}" alt="logo {{ Theme::place('title') }}" />
 			</a>
 		</h1>
 	@else 	

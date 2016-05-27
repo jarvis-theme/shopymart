@@ -225,12 +225,12 @@ nav select { display: none; }
 .content div.entry div.blog-entry article p a.zoom{ padding:20px 35px; background:url(../images/icon-eye.png) no-repeat center #f5640c; opacity:.9; -webkit-border-radius: 2px; -khtml-border-radius: 2px; border-radius: 2px;}
 .content div.entry div.blog-entry:hover .meta{ display:none; }
 
-<!--author-->
+/* author */
 .content .author{ width:100%; float:left; margin-bottom:40px; padding-bottom:30px; border-bottom:1px solid #e1e1e1;}
 .content .author h4 span{ font-size:11px;}
 .content .author img{ float:left; margin-right:20px;}
 
-<!--feedback-->
+/* feedback */
 .feedback-wrap{ width:100%; float:left; margin-bottom:40px; }
 .feedback-wrap .dvision{ width:100%; float:left; margin:0 0 20px 0px;}
 .feedback-wrap .dvision .feedback{ width:100%; float:right; margin-bottom:40px; border-bottom:1px solid #e5e5e5; padding:0 0 40px 0;}
@@ -251,7 +251,7 @@ nav select { display: none; }
 .feedback-wrap .dvision .feed3{ width:77%; float:right;}
 .feedback-wrap .dvision .feed3 div{ width:85%;}
 
-<!--commentform-->
+/* commentform */
 div.commentf{ float:left; width:100%;}
 #commentform{ margin-bottom:40px;}
 #commentform .input{ background:#fff; border:1px solid #f0f0f0; color:#9a9a9a; margin-bottom:20px; padding:10px; width:45%; margin-right:10px;
@@ -974,3 +974,23 @@ a.label:focus {
 .color-icon { font-size: 16px !important; color: #fff !important; margin: 0px 5px; }
 #lod { position: absolute; margin-left: 10px; margin-top: 7px; }
 #reg { margin-bottom: 30px; }
+.copyright { clear:both; display:block; }
+.logos { max-height: 180px;float:left;margin:1% }
+.camera_caption > div .button:hover { background: transparent; }
+center#paypal button[type="submit"] {
+	background: #019CDE;
+	border: none;
+	padding: 10px;
+	color: #fff;
+	border-radius: 5px;
+}
+center#paypal button[type="submit"]:hover { opacity: 0.6; cursor: pointer; }
+form[name="order"] > input[name="SAVE"] {
+	background: #B5062D; border: medium none; padding: 10px; border-radius: 5px; color: #fff;
+}
+form[name="order"] > input[name="SAVE"]:hover {
+	opacity: 0.8;
+	cursor: pointer;
+}
+.btn-pay { background: #00aee7; border: none; padding: 10px; color: #fff !important; border-radius: 5px }
+.btn-pay:hover { cursor: pointer; opacity: 0.7; color: #fff !important }

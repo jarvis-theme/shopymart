@@ -63,7 +63,7 @@
 						<li><span>Vendor:</span> {{$produk->vendor}}</li>
 					</ul>
 					<div id="reviews" class="hide" style="min-height: 110px;">
-						{{pluginTrustklik()}}
+						{{ pluginComment(product_url($produk), @$produk) }}
 					</div> 
 					<ul id="tags" class="hide">
 						{{getTagsProduk('<li><a href="#"></a></li>',$produk->tags,',');}}

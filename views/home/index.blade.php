@@ -5,7 +5,7 @@
 			<ul id="mycarousel" class="jcarousel-skin-tango item da-thumbs">
 				@foreach(home_product() as $key=>$myproduk)
 				<li>
-					<img src="{{URL::to(product_image_url($myproduk->gambar1))}}" alt="" />
+					<img src="{{URL::to(product_image_url($myproduk->gambar1))}}" alt="{{$myproduk->nama}}" />
 					<span>{{shortName($myproduk->nama,30)}}<br><small class="sale">{{price($myproduk->hargaCoret,false)}}</small>&nbsp;&nbsp;<small>{{price($myproduk->hargaJual,$matauang)}}</small></span>
 					<!--<span class="sale">Sale</span>-->
 
@@ -45,7 +45,7 @@
 			@foreach(vertical_banner() as $item)
 			<div>
 				<a href="{{URL::to($item->url)}}">
-					<img src="{{URL::to(banner_image_url($item->gambar))}}" />
+					<img src="{{URL::to(banner_image_url($item->gambar))}}" alt="info {{Theme::place('title')}}" />
 				</a>
 			</div>
 			@endforeach 
@@ -54,7 +54,7 @@
 			<h4>Hubungi Kami</h4>
 			<div style="min-height: 120px;">
 			@if($shop->ym)
-				{{ymyahoo($shop->ym)}}
+				{{ ymyahoo($shop->ym) }}
 			@endif	
 			<br>
 			@if($shop->telepon)
